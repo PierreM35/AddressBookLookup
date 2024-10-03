@@ -1,6 +1,6 @@
 ﻿
-using FindPersonService;
 using Grpc.Net.Client;
+using Protos;
 
 var channel = GrpcChannel.ForAddress("http://localhost:5091");
 

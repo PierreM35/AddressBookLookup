@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option csharp_namespace = "AdressBookService.Protos";
+option csharp_namespace = "Protos";
 
 service AdressBookGetter {
   rpc GetAddressBook (AddressBookRequest) returns (AddressBookResponse);

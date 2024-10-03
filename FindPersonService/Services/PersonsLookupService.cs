@@ -1,6 +1,5 @@
-﻿using AdressBookService.Protos;
-using Grpc.Core;
-using Grpc.Net.Client;
+﻿using Grpc.Core;
+using Protos;
 
 namespace FindPersonService.Services
 {
@@ -15,48 +14,48 @@ namespace FindPersonService.Services
 
         public override async Task FindPersons(PersonLookup request, IServerStreamWriter<Person> responseStream, ServerCallContext context)
         {
-            var channel = GrpcChannel.ForAddress("http://localhost:5091");
+            //var channel = GrpcChannel.ForAddress("http://localhost:5091");
 
-            var client = new AdressBookGetter.AdressBookGetterClient(channel);
-            var reply = await client.GetAddressBookAsync(new AddressBookRequest());
-            foreach (var person in reply.AddressBook.Persons)
-            {
-                await responseStream.WriteAsync(person);
-            }
+            //var client = new AdressBookGetter.AdressBookGetterClient(channel);
+            //var reply = await client.GetAddressBookAsync(new AddressBookRequest());
+            //foreach (var person in reply.AddressBook.Persons)
+            //{
+            //    await responseStream.WriteAsync(person);
+            //}
 
-            //await responseStream.WriteAsync(
-            //    new Person
-            //    {
-            //        Surname = "Pierre",
-            //        Address = new Person.Types.Address
-            //        {
-            //            Street = "Findelwiesenstr",
-            //            HomeNumber = 13,
-            //            City = "Nuremberg"
-            //        }
-            //    });
-            //await responseStream.WriteAsync(
-            //    new Person
-            //    {
-            //        Surname = "Laura",
-            //        Address = new Person.Types.Address
-            //        {
-            //            Street = "Findelwiesenstr",
-            //            HomeNumber = 13,
-            //            City = "Mogo"
-            //        }
-            //    });
-            //await responseStream.WriteAsync(
-            //    new Person
-            //    {
-            //        Surname = "Marc",
-            //        Address = new Person.Types.Address
-            //        {
-            //            Street = "Findelwiesenstr",
-            //            HomeNumber = 13,
-            //            City = "Rennes"
-            //        }
-            //    });
+            await responseStream.WriteAsync(
+                new Person
+                {
+                    Surname = "Pierre",
+                    Address = new Person.Types.Address
+                    {
+                        Street = "Findelwiesenstr",
+                        HomeNumber = 13,
+                        City = "Nuremberg"
+                    }
+                });
+            await responseStream.WriteAsync(
+                new Person
+                {
+                    Surname = "Laura",
+                    Address = new Person.Types.Address
+                    {
+                        Street = "Findelwiesenstr",
+                        HomeNumber = 13,
+                        City = "Mogo"
+                    }
+                });
+            await responseStream.WriteAsync(
+                new Person
+                {
+                    Surname = "Marc",
+                    Address = new Person.Types.Address
+                    {
+                        Street = "Findelwiesenstr",
+                        HomeNumber = 13,
+                        City = "Rennes"
+                    }
+                });
         }
     }
 }

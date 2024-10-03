@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -7,14 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Protos\AddressBook.proto" />
-    <None Remove="Protos\PersonsLookup.proto" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Protobuf Include="Protos\AddressBook.proto" GrpcServices="Client" />
-    <Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
-    <Protobuf Include="Protos\PersonsLookup.proto" Access="Public" GrpcServices="Server" />
+	  <Protobuf Include="..\AddressBookLookup.Domain\Protos\greet.proto" GrpcServices="Server" Link="Protos\greet.proto" />
+	  <Protobuf Include="..\AddressBookLookup.Domain\Protos\PersonsLookup.proto" GrpcServices="Server" Link="Protos\PersonsLookup.proto" />
+	  <Protobuf Include="..\AddressBookLookup.Domain\Protos\AddressBook.proto" GrpcServices="Client" Link="Protos\AddressBook.proto" />
   </ItemGroup>
 
   <ItemGroup>

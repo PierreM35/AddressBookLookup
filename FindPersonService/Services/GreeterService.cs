@@ -1,4 +1,5 @@
 using Grpc.Core;
+using Protos;
 
 namespace FindPersonService.Services
 {

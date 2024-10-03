@@ -1,6 +1,6 @@
 ﻿//using AddressBookLookup.Domain;
-using AdressBookService.Protos;
 using Grpc.Core;
+using Protos;
 
 namespace AdressBookService.Services
 {

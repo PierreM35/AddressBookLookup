@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <None Remove="Protos\greet.proto" />
-    <None Remove="Protos\PersonsLookup.proto" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,8 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Protobuf Include="Protos\greet.proto" GrpcServices="Client" />
-    <Protobuf Include="Protos\PersonsLookup.proto" Access="Public" GrpcServices="Client" />
+	  <Protobuf Include="..\AddressBookLookup.Domain\Protos\greet.proto" GrpcServices="Client" Link="Protos\greet.proto" />
+	  <Protobuf Include="..\AddressBookLookup.Domain\Protos\PersonsLookup.proto" GrpcServices="Client" Link="Protos\PersonsLookup.proto" />
   </ItemGroup>
 
 </Project>

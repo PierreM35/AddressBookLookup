@@ -10,4 +10,17 @@
     <Folder Include="Abstractions\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Protos\AddressBook.proto">
+      <GrpcServices>Client</GrpcServices>
+    </None>
+    <None Update="Protos\greet.proto">
+      <GrpcServices>Server</GrpcServices>
+    </None>
+    <None Update="Protos\PersonsLookup.proto">
+      <Access>Public</Access>
+      <GrpcServices>Client</GrpcServices>
+    </None>
+  </ItemGroup>
+
 </Project>
