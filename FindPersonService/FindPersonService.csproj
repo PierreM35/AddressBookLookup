@@ -8,8 +8,7 @@
 
   <ItemGroup>
 	  <Protobuf Include="..\AddressBookLookup.Domain\Protos\greet.proto" GrpcServices="Server" Link="Protos\greet.proto" />
-	  <Protobuf Include="..\AddressBookLookup.Domain\Protos\PersonsLookup.proto" GrpcServices="Server" Link="Protos\PersonsLookup.proto" />
-	  <Protobuf Include="..\AddressBookLookup.Domain\Protos\AddressBook.proto" GrpcServices="Client" Link="Protos\AddressBook.proto" />
+	  <Protobuf Include="..\AddressBookLookup.Domain\Protos\PersonLookup.proto" GrpcServices="Both" Link="Protos\PersonLookup.proto" />
   </ItemGroup>
 
   <ItemGroup>

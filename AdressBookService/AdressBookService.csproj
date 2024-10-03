@@ -19,7 +19,7 @@
   </ItemGroup>
 	
 	<ItemGroup>
-		<Protobuf Include="..\AddressBookLookup.Domain\Protos\AddressBook.proto" GrpcServices="Server" Link="Protos\AddressBook.proto" />
+		<Protobuf Include="..\AddressBookLookup.Domain\Protos\PersonLookup.proto" GrpcServices="Server" Link="Protos\PersonLookup.proto" />
 	</ItemGroup>
 
 </Project>

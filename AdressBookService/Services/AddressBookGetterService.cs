@@ -1,10 +1,9 @@
-﻿//using AddressBookLookup.Domain;
-using Grpc.Core;
+﻿using Grpc.Core;
 using Protos;
 
 namespace AdressBookService.Services
 {
-    public class AddressBookGetterService : AdressBookGetter.AdressBookGetterBase
+    public class AddressBookGetterService : PersonLookup.PersonLookupBase
     {
         //private IEnumerable<Person> _persons;
 
@@ -13,35 +12,35 @@ namespace AdressBookService.Services
 
         }
 
-        public override Task<AddressBookResponse> GetAddressBook(AddressBookRequest request, ServerCallContext context)
+        public override Task<AddressBook> GetAddressBook(AddressBookRequest request, ServerCallContext context)
         {
-            var addressBook = new AddressBookResponse.Types.AddressBook();
+            var addressBook = new AddressBook();
             addressBook.Persons.Add(
                 [
-                new AddressBookResponse.Types.AddressBook.Types.Person
+                new Person
                 {
                     Name = "Pierre",
-                    Address = new AddressBookResponse.Types.AddressBook.Types.Person.Types.Address
+                    Address = new Address
                     {
                         City = "Nuremberg",
                         HomeNumber = 2,
                         Street = "le bas hil"
                     }
                 },
-                new AddressBookResponse.Types.AddressBook.Types.Person
+                new Person
                 {
                     Name = "Laura",
-                    Address = new AddressBookResponse.Types.AddressBook.Types.Person.Types.Address
+                    Address = new Address
                     {
                         City = "Mogo",
                         HomeNumber = 3,
                         Street = "findel"
                     }
                 },
-                new AddressBookResponse.Types.AddressBook.Types.Person
+                new Person
                 {
                     Name = "Chloe",
-                    Address = new AddressBookResponse.Types.AddressBook.Types.Person.Types.Address
+                    Address = new Address
                     {
                         City = "Rennes",
                         HomeNumber = 3,
@@ -50,7 +49,7 @@ namespace AdressBookService.Services
                 }
                 ]);
 
-            return Task.FromResult(new AddressBookResponse { AddressBook = addressBook });
+            return Task.FromResult(addressBook);
         }
     }
 }

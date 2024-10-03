@@ -1,9 +1,10 @@
 ﻿using Grpc.Core;
+using Grpc.Net.Client;
 using Protos;
 
 namespace FindPersonService.Services
 {
-    public class PersonsLookupService : PersonsFinder.PersonsFinderBase
+    public class PersonsLookupService : PersonLookup.PersonLookupBase
     {
         private readonly ILogger<PersonsLookupService> _logger;
 
@@ -12,13 +13,13 @@ namespace FindPersonService.Services
             _logger = logger;
         }
 
-        public override async Task FindPersons(PersonLookup request, IServerStreamWriter<Person> responseStream, ServerCallContext context)
+        public override async Task FindPersons(SearchedPerson request, IServerStreamWriter<Person> responseStream, ServerCallContext context)
         {
             //var channel = GrpcChannel.ForAddress("http://localhost:5091");
 
-            //var client = new AdressBookGetter.AdressBookGetterClient(channel);
+            //var client = new PersonLookup.PersonLookupClient(channel);
             //var reply = await client.GetAddressBookAsync(new AddressBookRequest());
-            //foreach (var person in reply.AddressBook.Persons)
+            //foreach (var person in reply.Persons)
             //{
             //    await responseStream.WriteAsync(person);
             //}
@@ -27,18 +28,19 @@ namespace FindPersonService.Services
                 new Person
                 {
                     Surname = "Pierre",
-                    Address = new Person.Types.Address
+                    Address = new Address
                     {
                         Street = "Findelwiesenstr",
                         HomeNumber = 13,
                         City = "Nuremberg"
                     }
                 });
+
             await responseStream.WriteAsync(
                 new Person
                 {
                     Surname = "Laura",
-                    Address = new Person.Types.Address
+                    Address = new Address
                     {
                         Street = "Findelwiesenstr",
                         HomeNumber = 13,
@@ -49,7 +51,7 @@ namespace FindPersonService.Services
                 new Person
                 {
                     Surname = "Marc",
-                    Address = new Person.Types.Address
+                    Address = new Address
                     {
                         Street = "Findelwiesenstr",
                         HomeNumber = 13,
