@@ -15,6 +15,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.28.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Protos\AddressBookLookup.proto">
       <GrpcServices>Client</GrpcServices>
     </None>

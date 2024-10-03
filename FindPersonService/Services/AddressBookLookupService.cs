@@ -1,5 +1,4 @@
 ﻿using Grpc.Core;
-using Grpc.Net.Client;
 using Protos;
 
 namespace FindPersonService.Services
@@ -13,7 +12,7 @@ namespace FindPersonService.Services
             _logger = logger;
         }
 
-        public override Task<AddressBook> GetAddressBook(AddressBookRequest request, ServerCallContext context)
+        public override Task<AddressBook> GetAddressBook(GetAddressBookRequest request, ServerCallContext context)
         {
             var addressBook = new AddressBook();
             addressBook.Persons.Add(
@@ -53,17 +52,8 @@ namespace FindPersonService.Services
             return Task.FromResult(addressBook);
         }
 
-        public override async Task FindPersons(Person searchedPerson, IServerStreamWriter<Person> responseStream, ServerCallContext context)
+        public override async Task GetPersons(GetPersonRequest request, IServerStreamWriter<Person> responseStream, ServerCallContext context)
         {
-            //var channel = GrpcChannel.ForAddress("http://localhost:5091");
-
-            //var client = new PersonLookup.PersonLookupClient(channel);
-            //var reply = await client.GetAddressBookAsync(new AddressBookRequest());
-            //foreach (var person in reply.Persons)
-            //{
-            //    await responseStream.WriteAsync(person);
-            //}
-
             await responseStream.WriteAsync(
                 new Person
                 {
