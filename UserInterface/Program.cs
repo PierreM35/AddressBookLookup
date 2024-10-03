@@ -8,9 +8,12 @@ var client = new Greeter.GreeterClient(channel);
 var reply = await client.SayHelloAsync(new HelloRequest { Name = "Tim" });
 Console.WriteLine(reply.Message);
 
-var personClient = new PersonLookup.PersonLookupClient(channel);
+var personClient = new AddressBookLookup.AddressBookLookupClient(channel);
+var addressBook = personClient.GetAddressBook(new AddressBookRequest());
+
+
 var cancellationtokensource = new CancellationTokenSource();
-using (var call = personClient.FindPersons(new SearchedPerson { Name = "rsg" }))
+using (var call = personClient.FindPersons(new Person { Name = "rsg" }))
 {
     while (await call.ResponseStream.MoveNext(cancellationtokensource.Token))
     {

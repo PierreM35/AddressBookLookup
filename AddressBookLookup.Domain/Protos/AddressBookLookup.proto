@@ -2,9 +2,9 @@ syntax = "proto3";
 
 option csharp_namespace = "Protos";
 
-service PersonLookup {
+service AddressBookLookup {
   rpc GetAddressBook (AddressBookRequest) returns (AddressBook);
-  rpc FindPersons (SearchedPerson) returns (stream Person);
+  rpc FindPersons (Person) returns (stream Person);
 }
 
 message AddressBookRequest {
@@ -12,11 +12,6 @@ message AddressBookRequest {
 
 message AddressBook{
 	repeated Person persons = 1;
-}
-
-message SearchedPerson {
-	string name = 1;
-	string surname = 2;
 }
 
 message Person {

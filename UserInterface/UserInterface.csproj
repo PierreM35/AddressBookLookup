@@ -23,7 +23,7 @@
 
   <ItemGroup>
 	  <Protobuf Include="..\AddressBookLookup.Domain\Protos\greet.proto" GrpcServices="Client" Link="Protos\greet.proto" />
-	  <Protobuf Include="..\AddressBookLookup.Domain\Protos\PersonLookup.proto" GrpcServices="Client" Link="Protos\PersonLookup.proto" />
+	  <Protobuf Include="..\AddressBookLookup.Domain\Protos\AddressBookLookup.proto" GrpcServices="Client" Link="Protos\AddressBookLookup.proto" />
   </ItemGroup>
 
 </Project>
