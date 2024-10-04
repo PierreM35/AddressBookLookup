@@ -1,4 +1,4 @@
-﻿namespace AddressBookLookupDomain
+﻿namespace AddressBookLookupDomain.Abstractions
 {
     public interface IRepo<T>
     {

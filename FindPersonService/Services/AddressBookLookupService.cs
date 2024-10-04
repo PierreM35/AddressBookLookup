@@ -1,16 +1,17 @@
-﻿using AddressBookLookupDomain;
+﻿using AddressBookLookupDomain.Abstractions;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using Protos;
+using Domain = AddressBookLookupDomain;
 
 namespace FindPersonService.Services
 {
     public class AddressBookLookupService : AddressBookLookup.AddressBookLookupBase
     {
-        private readonly ILogger<AddressBookLookupService> _logger;
-        private readonly IRepo<AddressBookLookupDomain.Model.Person> _personRepo;
+        private readonly Domain.Abstractions.ILogger _logger;
+        private readonly IRepo<Domain.Model.Person> _personRepo;
 
-        public AddressBookLookupService(ILogger<AddressBookLookupService> logger, IRepo<AddressBookLookupDomain.Model.Person> personRepo)
+        public AddressBookLookupService(Domain.Abstractions.ILogger logger, IRepo<Domain.Model.Person> personRepo)
         {
             _logger = logger;
             _personRepo = personRepo;
@@ -23,6 +24,7 @@ namespace FindPersonService.Services
 
         public override async Task GetPersons(GetPersonsRequest request, IServerStreamWriter<Person> responseStream, ServerCallContext context)
         {
+            _logger.WriteInformation(new Domain.Resources.LogDetail { Message = $"Searching after {request.Person}." });
             foreach (var person in _personRepo
                 .GetAll()
                 .Select(p => ConvertToProto(p))
@@ -39,7 +41,7 @@ namespace FindPersonService.Services
             return addressBook;
         }
 
-        private Person ConvertToProto(AddressBookLookupDomain.Model.Person p)
+        private Person ConvertToProto(Domain.Model.Person p)
         {
             return new Person
             {

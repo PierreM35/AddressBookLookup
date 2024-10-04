@@ -1,13 +1,16 @@
-using AddressBookLookupDomain;
+using AddressBookLookupDomain.Abstractions;
 using AddressBookLookupDomain.Model;
+using AddressBookLookupDomain.Resources;
 using AddressBookLookupPersistence;
 using FindPersonService.Services;
+using ILogger = AddressBookLookupDomain.Abstractions.ILogger;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddGrpc();
 builder.Services.AddSingleton<IRepo<Person>, PersonRepo>();
+builder.Services.AddSingleton<ILogger, Logger>((iServiceProvider) => new Logger(Path.Combine(Path.GetTempPath(), "AddressBookLookupLog.txt")));
 
 var app = builder.Build();
 

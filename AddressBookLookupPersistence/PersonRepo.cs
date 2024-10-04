@@ -1,4 +1,4 @@
-﻿using AddressBookLookupDomain;
+﻿using AddressBookLookupDomain.Abstractions;
 using AddressBookLookupDomain.Model;
 
 namespace AddressBookLookupPersistence
