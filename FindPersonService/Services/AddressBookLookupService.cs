@@ -1,4 +1,5 @@
-﻿using Google.Protobuf.WellKnownTypes;
+﻿using AddressBookLookupDomain;
+using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using Protos;
 
@@ -7,70 +8,50 @@ namespace FindPersonService.Services
     public class AddressBookLookupService : AddressBookLookup.AddressBookLookupBase
     {
         private readonly ILogger<AddressBookLookupService> _logger;
-        private readonly AddressBook _addressBook;
+        private readonly IRepo<AddressBookLookupDomain.Model.Person> _personRepo;
 
-        public AddressBookLookupService(ILogger<AddressBookLookupService> logger)
+        public AddressBookLookupService(ILogger<AddressBookLookupService> logger, IRepo<AddressBookLookupDomain.Model.Person> personRepo)
         {
             _logger = logger;
-
-            _addressBook = new AddressBook();
-            _addressBook.Persons.Add(
-                [
-                new Person
-                {
-                    Name = "Pierre",
-                    Address = new Address
-                    {
-                        City = "Nuremberg",
-                        HomeNumber = 2,
-                        Street = "le bas hil"
-                    }
-                },
-                new Person
-                {
-                    Name = "Pierre",
-                    Address = new Address
-                    {
-                        City = "osse",
-                        HomeNumber = 4,
-                        Street = "le bas hil"
-                    }
-                },
-                new Person
-                {
-                    Name = "Laura",
-                    Address = new Address
-                    {
-                        City = "Mogo",
-                        HomeNumber = 3,
-                        Street = "findel"
-                    }
-                },
-                new Person
-                {
-                    Name = "Chloe",
-                    Address = new Address
-                    {
-                        City = "Rennes",
-                        HomeNumber = 3,
-                        Street = "rue des chavagnes"
-                    }
-                }
-                ]);
+            _personRepo = personRepo;
         }
 
         public override Task<AddressBook> GetAddressBook(GetAddressBookRequest request, ServerCallContext context)
         {
-            return Task.FromResult(_addressBook);
+            return Task.FromResult(GetAddresssBook());
         }
 
         public override async Task GetPersons(GetPersonsRequest request, IServerStreamWriter<Person> responseStream, ServerCallContext context)
         {
-            var searchedPerson = request.Person;
-            var mask = request.FieldMask;
-
-            foreach (var person in _addressBook.Persons.Where(p => Match(p, searchedPerson, mask)))
+            foreach (var person in _personRepo
+                .GetAll()
+                .Select(p => ConvertToProto(p))
+                .Where(p => Match(p, request.Person, request.FieldMask)))
                 await responseStream.WriteAsync(person);
+        }
+
+        private AddressBook GetAddresssBook()
+        {
+            var addressBook = new AddressBook();
+            foreach (var person in _personRepo.GetAll().Select(p => ConvertToProto(p)))
+                addressBook.Persons.Add(person);
+
+            return addressBook;
+        }
+
+        private Person ConvertToProto(AddressBookLookupDomain.Model.Person p)
+        {
+            return new Person
+            {
+                Name = p.Name,
+                Surname = p.Surname,
+                Address = new Address
+                {
+                    City = p.Address.City,
+                    HomeNumber = p.Address.HomeNumber,
+                    Street = p.Address.Street
+                }
+            };
         }
 
         private bool Match(Person person1, Person person2, FieldMask mask)

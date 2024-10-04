@@ -7,18 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Protos\PersonsLookup.proto" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Abstractions\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Google.Protobuf" Version="3.27.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="Protos\AddressBookLookup.proto">
       <GrpcServices>Client</GrpcServices>
     </None>

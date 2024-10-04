@@ -1,9 +1,13 @@
+using AddressBookLookupDomain;
+using AddressBookLookupDomain.Model;
+using AddressBookLookupPersistence;
 using FindPersonService.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddGrpc();
+builder.Services.AddSingleton<IRepo<Person>, PersonRepo>();
 
 var app = builder.Build();
 

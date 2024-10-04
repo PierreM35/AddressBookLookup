@@ -5,9 +5,11 @@ VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AddressBookLookupClient", "UserInterface\AddressBookLookupClient.csproj", "{4DE62DBC-4D05-425D-9606-89F02F584973}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AddressBookLookup.Domain", "AddressBookLookup.Domain\AddressBookLookup.Domain.csproj", "{4A37EC37-4547-4C00-B74D-E46D04CD0B53}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AddressBookLookupServer", "FindPersonService\AddressBookLookupServer.csproj", "{1EC2727B-84DB-4CE4-851B-E1F66B65E930}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddressBookLookupDomain", "AddressBookLookupDomain\AddressBookLookupDomain.csproj", "{12623CD8-0C79-4CCA-AFA5-8B957B0213CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddressBookLookupPersistence", "AddressBookLookupPersistence\AddressBookLookupPersistence.csproj", "{EB0BF00C-06F3-4BC0-8A13-75D851C56714}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,14 +21,18 @@ Global
 		{4DE62DBC-4D05-425D-9606-89F02F584973}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4DE62DBC-4D05-425D-9606-89F02F584973}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4DE62DBC-4D05-425D-9606-89F02F584973}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4A37EC37-4547-4C00-B74D-E46D04CD0B53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4A37EC37-4547-4C00-B74D-E46D04CD0B53}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4A37EC37-4547-4C00-B74D-E46D04CD0B53}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4A37EC37-4547-4C00-B74D-E46D04CD0B53}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1EC2727B-84DB-4CE4-851B-E1F66B65E930}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1EC2727B-84DB-4CE4-851B-E1F66B65E930}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1EC2727B-84DB-4CE4-851B-E1F66B65E930}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1EC2727B-84DB-4CE4-851B-E1F66B65E930}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12623CD8-0C79-4CCA-AFA5-8B957B0213CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12623CD8-0C79-4CCA-AFA5-8B957B0213CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12623CD8-0C79-4CCA-AFA5-8B957B0213CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12623CD8-0C79-4CCA-AFA5-8B957B0213CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB0BF00C-06F3-4BC0-8A13-75D851C56714}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB0BF00C-06F3-4BC0-8A13-75D851C56714}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB0BF00C-06F3-4BC0-8A13-75D851C56714}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB0BF00C-06F3-4BC0-8A13-75D851C56714}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
