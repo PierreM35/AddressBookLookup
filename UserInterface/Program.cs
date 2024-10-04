@@ -1,4 +1,5 @@
 ﻿
+using Google.Protobuf.WellKnownTypes;
 using Grpc.Net.Client;
 using Protos;
 
@@ -11,14 +12,19 @@ Console.WriteLine(reply.Message);
 var addressBookClient = new AddressBookLookup.AddressBookLookupClient(channel);
 var addressBook = addressBookClient.GetAddressBook(new GetAddressBookRequest());
 
-
 var cancellationtokensource = new CancellationTokenSource();
-using (var call = addressBookClient.GetPersons(new GetPersonRequest { Person = new Person { Name = "rsg" } }))
+var getPersonRequest = new GetPersonsRequest 
+{ 
+    Person = new Person { Name = "Pierre" }, 
+    FieldMask = new FieldMask { Paths = { "name" } }
+};
+
+using (var call = addressBookClient.GetPersons(getPersonRequest))
 {
     while (await call.ResponseStream.MoveNext(cancellationtokensource.Token))
     {
         var person = call.ResponseStream.Current;
-        Console.WriteLine($"{person.Surname} {person.Address.City} {person.Address.Street}");
+        Console.WriteLine($"{person.Name} {person.Address.City} {person.Address.Street}");
     }
 }
 

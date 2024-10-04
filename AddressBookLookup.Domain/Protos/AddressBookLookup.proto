@@ -1,17 +1,20 @@
 syntax = "proto3";
 
+import "google/protobuf/field_mask.proto";
+
 option csharp_namespace = "Protos";
 
 service AddressBookLookup {
   rpc GetAddressBook (GetAddressBookRequest) returns (AddressBook);
-  rpc GetPersons (GetPersonRequest) returns (stream Person);
+  rpc GetPersons (GetPersonsRequest) returns (stream Person);
 }
 
 message GetAddressBookRequest {
 }
 
-message GetPersonRequest {
+message GetPersonsRequest {
 	Person person = 1;
+	google.protobuf.FieldMask fieldMask = 2;
 }
 
 message AddressBook{

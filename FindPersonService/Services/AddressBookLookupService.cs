@@ -1,4 +1,5 @@
-﻿using Grpc.Core;
+﻿using Google.Protobuf.WellKnownTypes;
+using Grpc.Core;
 using Protos;
 
 namespace FindPersonService.Services
@@ -6,16 +7,14 @@ namespace FindPersonService.Services
     public class AddressBookLookupService : AddressBookLookup.AddressBookLookupBase
     {
         private readonly ILogger<AddressBookLookupService> _logger;
+        private readonly AddressBook _addressBook;
 
         public AddressBookLookupService(ILogger<AddressBookLookupService> logger)
         {
             _logger = logger;
-        }
 
-        public override Task<AddressBook> GetAddressBook(GetAddressBookRequest request, ServerCallContext context)
-        {
-            var addressBook = new AddressBook();
-            addressBook.Persons.Add(
+            _addressBook = new AddressBook();
+            _addressBook.Persons.Add(
                 [
                 new Person
                 {
@@ -24,6 +23,16 @@ namespace FindPersonService.Services
                     {
                         City = "Nuremberg",
                         HomeNumber = 2,
+                        Street = "le bas hil"
+                    }
+                },
+                new Person
+                {
+                    Name = "Pierre",
+                    Address = new Address
+                    {
+                        City = "osse",
+                        HomeNumber = 4,
                         Street = "le bas hil"
                     }
                 },
@@ -48,46 +57,45 @@ namespace FindPersonService.Services
                     }
                 }
                 ]);
-
-            return Task.FromResult(addressBook);
         }
 
-        public override async Task GetPersons(GetPersonRequest request, IServerStreamWriter<Person> responseStream, ServerCallContext context)
+        public override Task<AddressBook> GetAddressBook(GetAddressBookRequest request, ServerCallContext context)
         {
-            await responseStream.WriteAsync(
-                new Person
-                {
-                    Surname = "Pierre",
-                    Address = new Address
-                    {
-                        Street = "Findelwiesenstr",
-                        HomeNumber = 13,
-                        City = "Nuremberg"
-                    }
-                });
+            return Task.FromResult(_addressBook);
+        }
 
-            await responseStream.WriteAsync(
-                new Person
-                {
-                    Surname = "Laura",
-                    Address = new Address
-                    {
-                        Street = "Findelwiesenstr",
-                        HomeNumber = 13,
-                        City = "Mogo"
-                    }
-                });
-            await responseStream.WriteAsync(
-                new Person
-                {
-                    Surname = "Marc",
-                    Address = new Address
-                    {
-                        Street = "Findelwiesenstr",
-                        HomeNumber = 13,
-                        City = "Rennes"
-                    }
-                });
+        public override async Task GetPersons(GetPersonsRequest request, IServerStreamWriter<Person> responseStream, ServerCallContext context)
+        {
+            var searchedPerson = request.Person;
+            var mask = request.FieldMask;
+
+            foreach (var person in _addressBook.Persons.Where(p => Match(p, searchedPerson, mask)))
+                await responseStream.WriteAsync(person);
+        }
+
+        private bool Match(Person person1, Person person2, FieldMask mask)
+        {
+            foreach (var path in mask.Paths)
+            {
+                if (path.Equals("Name", StringComparison.OrdinalIgnoreCase) && !person1.Name.Equals(person2.Name))
+                    return false;
+
+                if (path.Equals("Surname", StringComparison.OrdinalIgnoreCase) && !person1.Surname.Equals(person2.Surname))
+                    return false;
+
+                if (path.Equals("Address", StringComparison.OrdinalIgnoreCase) && !AreEqual(person1.Address, person2.Address))
+                    return false;
+            }
+
+            return true;
+        }
+
+        private static bool AreEqual(Address addresse1, Address addresse2)
+        {
+            return
+                addresse1.Street.Equals(addresse2.Street) &&
+                addresse1.HomeNumber == addresse2.HomeNumber &&
+                addresse1.City.Equals(addresse2.City);
         }
     }
 }
