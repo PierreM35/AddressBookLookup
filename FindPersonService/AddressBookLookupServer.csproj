@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-	  <Protobuf Include="..\AddressBookLookup.Domain\Protos\greet.proto" GrpcServices="Server" Link="Protos\greet.proto" />
 	  <Protobuf Include="..\AddressBookLookup.Domain\Protos\AddressBookLookup.proto" GrpcServices="Both" Link="Protos\AddressBookLookup.proto" />
   </ItemGroup>
 

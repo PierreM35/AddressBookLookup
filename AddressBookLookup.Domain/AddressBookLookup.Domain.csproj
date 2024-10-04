@@ -22,9 +22,6 @@
     <None Update="Protos\AddressBookLookup.proto">
       <GrpcServices>Client</GrpcServices>
     </None>
-    <None Update="Protos\greet.proto">
-      <GrpcServices>Server</GrpcServices>
-    </None>
   </ItemGroup>
 
 </Project>
