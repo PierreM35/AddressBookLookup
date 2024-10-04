@@ -20,19 +20,17 @@ namespace AddressBookLookupPersistence
 
         public void Add(Person data)
         {
-            throw new NotImplementedException();
+            _people.Add(data);
         }
 
-        public IEnumerable<Person> Get(Func<Person, bool> predicate)
-        {
-            throw new NotImplementedException();
-        }
+        public IEnumerable<Person> Get(Func<Person, bool> predicate) => _people.Where(predicate);
 
         public IEnumerable<Person> GetAll() => _people;
 
         public void Remove(Func<Person, bool> predicate)
         {
-            throw new NotImplementedException();
+            foreach (var person in _people.Where(predicate))
+                _people.Remove(person);
         }
     }
 }
