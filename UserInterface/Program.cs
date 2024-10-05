@@ -2,7 +2,6 @@
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Net.Client;
 using Protos;
-using System.Runtime.CompilerServices;
 
 var channel = GrpcChannel.ForAddress("http://localhost:5091");
 var addressBookClient = new AddressBookLookup.AddressBookLookupClient(channel);
