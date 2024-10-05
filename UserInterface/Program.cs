@@ -98,7 +98,7 @@ void ListPeople()
 
 static void ExposePerson(Person person)
 {
-    Console.WriteLine($"{person.Name} {person.Address.City} {person.Address.Street}");
+    Console.WriteLine($"{person.Surname} {person.Name}, {person.Address.HomeNumber} {person.Address.Street} {person.Address.City}");
 }
 
 static string Get(string what)
