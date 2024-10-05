@@ -29,6 +29,6 @@ message Person {
 
 message Address {
 	string street = 1;
-	int32 homeNumber = 2;
+	string homeNumber = 2;
 	string city = 3;
 }

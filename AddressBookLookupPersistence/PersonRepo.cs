@@ -11,10 +11,10 @@ namespace AddressBookLookupPersistence
         {
             _people = new List<Person>
             {
-                new Person("Pierre", "", new Address("Nuremberg", 2, "le bas hil")),  
-                new Person("Pierre", "", new Address("osse", 4, "le bas hil")),  
-                new Person("Laura", "", new Address("Mogo", 2, "findelwiesen")),
-                new Person("Chloe", "", new Address("Rennes", 3, "rue des chavagnes"))
+                new Person("Pierre", "", new Address("Nuremberg", "2", "le bas hil")),  
+                new Person("Pierre", "", new Address("osse", "4", "le bas hil")),  
+                new Person("Laura", "", new Address("Mogo", "2", "findelwiesen")),
+                new Person("Chloe", "", new Address("Rennes", "3", "rue des chavagnes"))
             };
         }
 

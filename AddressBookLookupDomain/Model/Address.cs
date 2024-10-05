@@ -4,10 +4,10 @@
     {
         public Guid Id { get; }
         public string? City { get; }
-        public int HomeNumber { get; }
+        public string HomeNumber { get; }
         public string? Street { get; }
 
-        public Address(string? city, int homeNumber, string? street)
+        public Address(string? city, string homeNumber, string? street)
         {
             City = city;
             HomeNumber = homeNumber;
