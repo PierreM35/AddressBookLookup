@@ -25,6 +25,7 @@ namespace FindPersonService.Services
         public override async Task GetPersons(GetPersonsRequest request, IServerStreamWriter<Person> responseStream, ServerCallContext context)
         {
             _logger.WriteInformation(new Domain.Resources.LogDetail { Message = $"Searching after {request.Person}." });
+
             foreach (var person in _personRepo
                 .GetAll()
                 .Select(p => ConvertToProto(p))

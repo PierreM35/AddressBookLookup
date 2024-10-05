@@ -2,6 +2,7 @@
 {
     public class Address
     {
+        public Guid Id { get; }
         public string? City { get; }
         public int HomeNumber { get; }
         public string? Street { get; }

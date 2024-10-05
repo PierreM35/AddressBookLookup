@@ -20,7 +20,15 @@ using (var call = addressBookClient.GetPersons(getPersonRequest))
     {
         var person = call.ResponseStream.Current;
         Console.WriteLine($"{person.Name} {person.Address.City} {person.Address.Street}");
+        ProcessPerson(person);
     }
 }
 
 Console.ReadLine();
+
+async Task ProcessPerson(Person person)
+{
+    await Task.Delay(2000);
+    Console.WriteLine($"{person.Name} processed");
+}
+
