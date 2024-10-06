@@ -1,5 +1,4 @@
 ﻿using AddressBookLookupDomain.Model;
-using AddressBookLookupDomain.Resources;
 using Microsoft.EntityFrameworkCore;
 
 namespace AddressBookLookupPersistence

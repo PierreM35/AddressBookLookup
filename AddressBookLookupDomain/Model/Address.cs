@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SQLiteNetExtensions.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace AddressBookLookupDomain.Model
 {
@@ -9,6 +10,8 @@ namespace AddressBookLookupDomain.Model
         public string City { get; set; }
         public string HomeNumber { get; set; }
         public string Street { get; set; }
+        [OneToMany(CascadeOperations = CascadeOperation.All)]
+        public List<Person> Persons { get; set; }
 
         public Address()
         {

@@ -19,7 +19,7 @@ namespace FindPersonService.Services
 
         public override Task<AddressBook> GetAddressBook(GetAddressBookRequest request, ServerCallContext context)
         {
-            return Task.FromResult(GetAddresssBook());
+            return Task.FromResult(GetAddressBook());
         }
 
         public override async Task GetPersons(GetPersonsRequest request, IServerStreamWriter<Person> responseStream, ServerCallContext context)
@@ -33,7 +33,7 @@ namespace FindPersonService.Services
                 await responseStream.WriteAsync(person);
         }
 
-        private AddressBook GetAddresssBook()
+        private AddressBook GetAddressBook()
         {
             var addressBook = new AddressBook();
             foreach (var person in _personRepo.GetAll().Select(p => ConvertToProto(p)))
