@@ -1,14 +1,22 @@
-﻿namespace AddressBookLookupDomain.Model
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace AddressBookLookupDomain.Model
 {
     public class Address
     {
-        public Guid Id { get; }
-        public string? City { get; }
-        public string HomeNumber { get; }
-        public string? Street { get; }
+        [Key]
+        public Guid Id { get; set; }
+        public string City { get; set; }
+        public string HomeNumber { get; set; }
+        public string Street { get; set; }
 
-        public Address(string? city, string homeNumber, string? street)
+        public Address()
         {
+        }
+
+        public Address(Guid id, string city, string homeNumber, string street)
+        {
+            Id = id;
             City = city;
             HomeNumber = homeNumber;
             Street = street;

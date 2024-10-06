@@ -44,16 +44,18 @@ namespace FindPersonService.Services
 
         private Person ConvertToProto(Domain.Model.Person p)
         {
+            var address = p.Address != null ? new Address
+            {
+                City = p.Address.City,
+                HomeNumber = p.Address.HomeNumber,
+                Street = p.Address.Street
+            } : null;
+
             return new Person
             {
                 Name = p.Name,
                 Surname = p.Surname,
-                Address = new Address
-                {
-                    City = p.Address.City,
-                    HomeNumber = p.Address.HomeNumber,
-                    Street = p.Address.Street
-                }
+                Address = address
             };
         }
 

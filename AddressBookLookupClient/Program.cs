@@ -98,7 +98,11 @@ void ListPeople()
 
 static void ExposePerson(Person person)
 {
-    Console.WriteLine($"{person.Surname} {person.Name}, {person.Address.HomeNumber} {person.Address.Street} {person.Address.City}");
+    var address = person.Address == null ?
+        "No address" :
+        $"{person.Address.HomeNumber} {person.Address.Street} {person.Address.City}";
+
+    Console.WriteLine($"{person.Surname} {person.Name}, {address}");
 }
 
 static string Get(string what)

@@ -1,4 +1,5 @@
 ﻿using AddressBookLookupDomain.Model;
+using AddressBookLookupDomain.Resources;
 using Microsoft.EntityFrameworkCore;
 
 namespace AddressBookLookupPersistence
@@ -12,11 +13,18 @@ namespace AddressBookLookupPersistence
 
         public PeopleContext()
         {
-            var folder = Environment.SpecialFolder.LocalApplicationData;
-            var path = Environment.GetFolderPath(folder);
-            _dbPath = Path.Join(path, "Persons.db");
+            _dbPath = GetDbPath();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options) => options.UseSqlite($"Data Source={_dbPath}");
+
+        private string GetDbPath()
+        {
+            var exeDir = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
+            for (var i = 0; i < 4; i++)
+                exeDir = exeDir.Parent;
+
+            return Path.Combine(exeDir.FullName, @"AddressBookLookupPersistence\Persons.db");
+        }
     }
 }
