@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/AddressBookLookupPersistence/Persons.db-shm
+/AddressBookLookupPersistence/Persons.db-wal
